@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="../css/bootstrap-icons.css" rel="stylesheet">
+    <link href="../css/login-profile.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .wrapper {
+            margin-top: 40px;
+        }
+        
+        #formContent {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 450px;
+        }
+        
+        input[type=text], input[type=password] {
+            background-color: #f8f9fa;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px;
+            border: 1px solid #e9ecef;
+        }
+        
+        input[type=text]:focus, input[type=password]:focus {
+            background-color: #fff;
+            border-color: #dc3545;
+            outline: none;
+        }
+        
+        input[type=submit] {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            padding: 15px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        input[type=submit]:hover {
+            background-color: #c82333;
+        }
+        
+        .admin-badge {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: var(--border-radius-small);
+            font-size: 14px;
+            margin-left: 5px;
+            font-weight: 600;
+        }
+        
+        .error-message {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-size: 14px;
+            background-color: #f8d7da;
+            color: #842029;
+            border: 1px solid #f5c2c7;
+        }
+        
+        #formFooter {
+            margin-top: 30px;
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        #formFooter a {
+            color: #6c757d;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px 0;
+            transition: all 0.3s;
+        }
+        
+        #formFooter a:hover {
+            color: #dc3545;
+        }
+        
+        #logo {
+            display: block;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #0d6efd;
+            margin-bottom: 30px;
+            text-decoration: none;
+        }
+        
+        .warning-note {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            border-radius: var(--border-radius-small);
+            font-size: 14px;
+            text-align: center;
+            width: 85%;
+            display: inline-block;
+        }
+        
+        /* Admin specific styling */
+        .admin-btn {
+            background-color: var(--primary-color) !important;
+        }
+        
+        .admin-btn:hover {
+            background-color: var(--secondary-color) !important;
+        }
+        
+        /* Hidden elements */
+        .error-message.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Admin Login Form -->
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Header -->
+            <a href="index.html" id="logo">Projects <span class="admin-badge">ADMIN</span></a>
+      
+            <!-- Login Form -->
+            <form id="admin-login-form">
+                <input type="text" id="login" class="fadeIn second" name="username" placeholder="Admin username">
+                <input type="password" id="password" class="fadeIn third" name="password" placeholder="Admin password">
+                <input type="submit" id="login-btn" class="fadeIn fourth admin-btn" value="Admin Login">
+            </form>
+      
+            <!-- Display error messages here -->
+            <div id="error-message" class="error-message hidden"></div>
+      
+            <div class="warning-note">
+                <strong>Note:</strong> This area is restricted to authorized administrators only.
+            </div>
+      
+            <!-- Footer -->
+            <div id="formFooter">
+                <a href="student-login.html">Back to Student Login</a><br>
+                <a href="index.html">Return to Homepage</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Admin login form submission
+            const loginForm = document.getElementById('admin-login-form');
+            const errorMessage = document.getElementById('error-message');
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('login').value;
+                const password = document.getElementById('password').value;
+                
+                if(!username || !password) {
+                    showError('Please enter both username and password');
+                    return;
+                }
+                
+                // Show loading state
+                const loginBtn = document.getElementById('login-btn');
+                const originalBtnText = loginBtn.value;
+                loginBtn.value = 'Logging in...';
+                loginBtn.disabled = true;
+                
+                // Real API call
+                fetch('/api/users/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Check if user is admin
+                        if (data.user && data.user.role === 'admin') {
+                            // Store admin info and token
+                            localStorage.setItem('token', data.token);
+                            localStorage.setItem('user', JSON.stringify(data.user));
+                            localStorage.setItem('isLoggedIn', 'true');
+                            localStorage.setItem('isAdminLoggedIn', 'true');
+                            
+                            // Redirect to admin dashboard
+                            window.location.href = 'admin-dashboard.html';
+                        } else {
+                            showError('You do not have admin privileges');
+                        }
+                    } else {
+                        showError(data.message || 'Invalid username or password');
+                    }
+                })
+                .catch(error => {
+                    console.error('Login error:', error);
+                    showError('Connection error. Please try again.');
+                })
+                .finally(() => {
+                    loginBtn.value = originalBtnText;
+                    loginBtn.disabled = false;
+                });
+            });
+            
+            // Helper function
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.classList.remove('hidden');
+                setTimeout(function() {
+                    errorMessage.classList.add('hidden');
+                }, 5000);
+            }
+        });
+    </script>
+<script src="../js/login-profile.js"></script>
+</body>
+</html> 
+
+
+
+
+

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Project - Projects</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/templatemo-topic-listing.css">
+    <style>
+        .form-container {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .alert {
+            display: none;
+        }
+    </style>
+    <link href="../css/login-profile.css" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="/html/index.html">
+                    <i class="bi-back"></i>
+                    <span>Projects</span>
+                </a>
+
+                <div class="d-lg-none ms-auto me-4">
+                    <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="/html/index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="/html/repeated.html">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll active" href="/html/submit-project.html">Submit Project</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="/html/contact.html">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-none d-lg-block">
+                        <a href="/html/student-login.html" class="navbar-icon bi-person" onclick="window.location.href='/html/student-login.html'; return false;"></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <header class="site-header d-flex flex-column justify-content-center align-items-center">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-5 col-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/html/index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Submit Project</li>
+                            </ol>
+                        </nav>
+
+                        <h2 class="text-white">Submit Your Project</h2>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="section-padding section-bg">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-12">
+                        <div class="form-container">
+                            <h3 class="mb-4 text-center">Project Submission Form</h3>
+                            
+                            <div class="alert alert-success" id="success-message">
+                                Your project has been submitted successfully. It will be reviewed by our administrators.
+                            </div>
+                            
+                            <div class="alert alert-danger" id="error-message">
+                                There was an error submitting your project. Please try again.
+                            </div>
+                            
+                            <form id="project-submission-form">
+                                <div class="form-group">
+                                    <label for="title">Project Title *</label>
+                                    <input type="text" class="form-control" id="title" name="title" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="description">Project Description *</label>
+                                    <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="studentName">Your Name *</label>
+                                    <input type="text" class="form-control" id="studentName" name="studentName" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="rollNumber">Roll Number *</label>
+                                    <input type="text" class="form-control" id="rollNumber" name="rollNumber" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="category">Project Category *</label>
+                                    <select class="form-control" id="category" name="category" required>
+                                        <option value="">Select a category</option>
+                                        <option value="Web Development">Web Development</option>
+                                        <option value="IOT">IOT</option>
+                                        <option value="App Development">App Development</option>
+                                        <option value="API Development">API Development</option>
+                                        <option value="UI/UX">UI/UX</option>
+                                        <option value="Machine Learning">Machine Learning</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="text-center">
+                                    <button type="submit" class="btn custom-btn">Submit Project</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-12 mb-4 pb-2">
+                    <a class="navbar-brand mb-2" href="/html/index.html">
+                        <i class="bi-back"></i>
+                        <span>Projects</span>
+                    </a>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-6">
+                    <h6 class="site-footer-title mb-3">Resources</h6>
+
+                    <ul class="site-footer-links">
+                        <li class="site-footer-link-item">
+                            <a href="/html/index.html" class="site-footer-link">Home</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="/html/repeated.html" class="site-footer-link">Projects</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">FAQs</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="/html/contact.html" class="site-footer-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
+                    <h6 class="site-footer-title mb-3">Information</h6>
+
+                    <p class="text-white d-flex mb-1">
+                        <a href="tel:+919999999999" class="site-footer-link">
+                            +91 7660091140
+                        </a>
+                    </p>
+
+                    <p class="text-white d-flex">
+                        <a href="mailto:projects@gmail.com" class="site-footer-link">
+                            projects@gmail.com
+                        </a>
+                    </p>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-12 mt-4 mt-lg-0 ms-auto">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            English
+                        </button>
+
+                        <ul class="dropdown-menu">
+                            <li><button class="dropdown-item" type="button">English</button></li>
+                            <li><button class="dropdown-item" type="button">Hindi</button></li>
+                            <li><button class="dropdown-item" type="button">Telugu</button></li>
+                        </ul>
+                    </div>
+
+                    <p class="copyright-text mt-lg-5 mt-4">Copyright © 2024 Projects. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery.sticky.js"></script>
+    <script src="../js/custom.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('project-submission-form');
+            const successMessage = document.getElementById('success-message');
+            const errorMessage = document.getElementById('error-message');
+            
+            // Check if user is logged in
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const user = isLoggedIn ? JSON.parse(localStorage.getItem('user')) : null;
+            
+            // Pre-fill form if user is logged in
+            if (isLoggedIn && user) {
+                if (user.username) {
+                    document.getElementById('studentName').value = user.username;
+                }
+            }
+            
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Recommend login but don't require it
+                if (!isLoggedIn) {
+                    if (!confirm('It is recommended to login before submitting a project. Continue without logging in?')) {
+                        window.location.href = '/html/student-login.html';
+                        return;
+                    }
+                }
+                
+                // Get form data
+                const formData = {
+                    title: document.getElementById('title').value,
+                    description: document.getElementById('description').value,
+                    studentName: document.getElementById('studentName').value,
+                    rollNumber: document.getElementById('rollNumber').value,
+                    email: document.getElementById('email').value,
+                    category: document.getElementById('category').value
+                };
+                
+                try {
+                    // Show loading state
+                    const submitBtn = document.querySelector('button[type="submit"]');
+                    const originalBtnText = submitBtn.textContent;
+                    submitBtn.textContent = 'Submitting...';
+                    submitBtn.disabled = true;
+                    
+                    // Submit to our backend API
+                    const response = await fetch('/api/submissions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        // Show success message
+                        successMessage.style.display = 'block';
+                        errorMessage.style.display = 'none';
+                        form.reset();
+                    } else {
+                        // Show error message
+                        errorMessage.textContent = data.message || 'Error submitting project. Please try again.';
+                        errorMessage.style.display = 'block';
+                        successMessage.style.display = 'none';
+                    }
+                    
+                    // Reset button state
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                } catch (error) {
+                    console.error('Error:', error);
+                    errorMessage.textContent = 'Connection error. Please try again later.';
+                    errorMessage.style.display = 'block';
+                    successMessage.style.display = 'none';
+                    
+                    // Reset button state
+                    const submitBtn = document.querySelector('button[type="submit"]');
+                    submitBtn.textContent = 'Submit Project';
+                    submitBtn.disabled = false;
+                }
+            });
+        });
+    </script>
+<script src="../js/login-debug.js"></script>
+<script src="../js/keyboard-shortcuts.js"></script>
+<script src="../js/login-profile.js"></script>
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
