@@ -1,0 +1,6 @@
+{
+    "cursor.general.globalCursorIgnoreList": [
+        "**/id_dsa",
+        "**/.ssh/id_*"
+    ]
+}

@@ -14,10 +14,25 @@ const userSchema = new mongoose.Schema({
         minlength: 3,
         select: false
     },
+    phoneNumber: {
+        type: String,
+        required: false,
+        trim: true
+    },
+    otp: {
+        code: {
+            type: String,
+            default: null
+        },
+        expiresAt: {
+            type: Date,
+            default: null
+        }
+    },
     role: {
         type: String,
-        enum: ['user', 'admin'],
-        default: 'user'
+        enum: ['student', 'admin'],
+        default: 'student'
     },
     is_admin: {
         type: Boolean,
@@ -41,6 +56,27 @@ userSchema.pre('save', async function(next) {
 // Method to compare password
 userSchema.methods.comparePassword = async function(enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
+};
+
+// Method to verify OTP
+userSchema.methods.verifyOTP = function(enteredOTP) {
+    console.log('OTP verification attempt:');
+    console.log('- Stored OTP:', this.otp.code);
+    console.log('- Entered OTP:', enteredOTP);
+    console.log('- OTP Expires At:', this.otp.expiresAt);
+    console.log('- Current time:', new Date());
+    console.log('- OTP expired?', new Date() > this.otp.expiresAt);
+    
+    // Check if OTP exists and is not expired
+    if (!this.otp.code || !this.otp.expiresAt || new Date() > this.otp.expiresAt) {
+        console.log('OTP validation failed: OTP missing or expired');
+        return false;
+    }
+    
+    // Compare as strings to ensure type consistency
+    const isValid = String(this.otp.code) === String(enteredOTP);
+    console.log('OTP match result:', isValid);
+    return isValid;
 };
 
 module.exports = mongoose.model('User', userSchema); 

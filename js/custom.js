@@ -1,7 +1,7 @@
-
+// Wrap everything in a try-catch to prevent crashes
+try {
   (function ($) {
-  
-  "use strict";
+    "use strict";
 
     // MENU
     $('.navbar-collapse a').on('click',function(){
@@ -10,91 +10,101 @@
     
     // CUSTOM LINK
     $('.smoothscroll').click(function(){
-      var el = $(this).attr('href');
-      var elWrapped = $(el);
-      var header_height = $('.navbar').height();
-  
-      scrollToDiv(elWrapped,header_height);
+      // Skip processing for student login links
+      if ($(this).attr('href').includes('student-login.html')) {
+        return true; // Allow default behavior for login links
+      }
+      
+      try {
+        var el = $(this).attr('href');
+        var elWrapped = $(el);
+        var header_height = $('.navbar').height();
+
+        scrollToDiv(elWrapped,header_height);
+      } catch (err) {
+        console.error('Error in smoothscroll:', err);
+        return true; // Allow default behavior on error
+      }
       return false;
-  
+
       function scrollToDiv(element,navheight){
         var offset = element.offset();
         var offsetTop = offset.top;
         var totalScroll = offsetTop-navheight;
-  
+
         $('body,html').animate({
         scrollTop: totalScroll
         }, 300);
       }
     });
 
-    $(window).on('scroll', function(){
-      function isScrollIntoView(elem, index) {
-        var docViewTop = $(window).scrollTop();
-        var docViewBottom = docViewTop + $(window).height();
-        var elemTop = $(elem).offset().top;
-        var elemBottom = elemTop + $(window).height()*.5;
-        if(elemBottom <= docViewBottom && elemTop >= docViewTop) {
-          $(elem).addClass('active');
-        }
-        if(!(elemBottom <= docViewBottom)) {
-          $(elem).removeClass('active');
-        }
-        var MainTimelineContainer = $('#vertical-scrollable-timeline')[0];
-        var MainTimelineContainerBottom = MainTimelineContainer.getBoundingClientRect().bottom - $(window).height()*.5;
-        $(MainTimelineContainer).find('.inner').css('height',MainTimelineContainerBottom+'px');
+    // Direct navigation for login icons
+    $('a.navbar-icon.bi-person').on('click', function(e) {
+      if ($(this).attr('href').includes('student-login.html')) {
+        e.preventDefault();
+        window.location.href = $(this).attr('href');
+        return false;
       }
-      var timeline = $('#vertical-scrollable-timeline li');
-      Array.from(timeline).forEach(isScrollIntoView);
     });
-  
+
+    $(window).on('scroll', function(){
+      try {
+        function isScrollIntoView(elem, index) {
+          var docViewTop = $(window).scrollTop();
+          var docViewBottom = docViewTop + $(window).height();
+          var elemTop = $(elem).offset().top;
+          var elemBottom = elemTop + $(window).height()*.5;
+          if(elemBottom <= docViewBottom && elemTop >= docViewTop) {
+            $(elem).addClass('active');
+          }
+          if(!(elemBottom <= docViewBottom)) {
+            $(elem).removeClass('active');
+          }
+          var MainTimelineContainer = $('#vertical-scrollable-timeline')[0];
+          if (MainTimelineContainer) {
+            var MainTimelineContainerBottom = MainTimelineContainer.getBoundingClientRect().bottom - $(window).height()*.5;
+            $(MainTimelineContainer).find('.inner').css('height',MainTimelineContainerBottom+'px');
+          }
+        }
+        
+        var timeline = $('#vertical-scrollable-timeline li');
+        if (timeline.length > 0) {
+          Array.from(timeline).forEach(isScrollIntoView);
+        }
+      } catch (err) {
+        console.error('Error in scroll handler:', err);
+      }
+    });
+
   })(window.jQuery);
-
-
-// get search bar element
-const redirect = document.getElementById("keywordhome");
-
-// listen for user events
-redirect.addEventListener("click", (event) => {
-    openTab();
-});
-
-function openTab(){
-  window.open("search.html","_self");
+} catch (err) {
+  console.error('Error in custom.js:', err);
 }
 
-// const searchInput = document.getElementById("keywordhome");
 
-// // store name elements in array-like object
-// const namesFromDOM = document.getElementsByClassName("col-lg-4");
+// Search bar element handling wrapped in try-catch
+try {
+  // get search bar element
+  const redirect = document.getElementById("keywordhome");
 
-// // listen for user events
-// searchInput.addEventListener("keyup", (event) => {
-//     // openTab();
+  // listen for user events
+  if (redirect) {
+    redirect.addEventListener("click", (event) => {
+      openTab();
+    });
+  }
 
-//     const { value } = event.target;
-    
-//     // get user search input converted to lowercase
-//     const searchQuery = value.toLowerCase();
-    
-//     for (const nameElement of namesFromDOM) {
-//         // store name text and convert to lowercase
-//         let name = nameElement.textContent.toLowerCase();
-        
-//         // compare current name to search input
-//         if (name.includes(searchQuery)) {
-//             // found name matching search, display it
-//             nameElement.style.display = "block";
-//         } else {
-//             // no match, don't display name
-//             nameElement.style.display = "none";
-//         }
-//     }
+  function openTab(){
+    window.open("search.html","_self");
+  }
+} catch (err) {
+  console.error('Error in search redirection:', err);
+}
+
+// Comment out the erroneous code that uses getElementByClass
+// let con = document.getElementByClass("hello");
+// con.addEventListener("click", (e) => {
+//   let popup = alert("Coming Soon");
+//   console.log(popup);
 // });
-
-let con = document.getElementByClass("hello");
-con.addEventListener("click", (e) => {
-  let popup = alert("Coming Soon");
-  console.log(popup);
-});
 

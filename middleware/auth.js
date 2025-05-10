@@ -19,7 +19,7 @@ exports.protect = async (req, res, next) => {
     
     try {
         // Verify token
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'micro_projects_secret_key');
+        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'projects_secret_key');
         
         // Check if user still exists
         const user = await User.findById(decoded.id);

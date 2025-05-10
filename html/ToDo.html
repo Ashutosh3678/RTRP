@@ -16,16 +16,17 @@
 
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap" rel="stylesheet">
                         
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
 
-        <link href="css/bootstrap-icons.css" rel="stylesheet">
+        <link href="../css/bootstrap-icons.css" rel="stylesheet">
 
-        <link href="css/templatemo-topic-listing.css" rel="stylesheet">
+        <link href="../css/templatemo-topic-listing.css" rel="stylesheet">
         
         <!-- Todo App CSS -->
-        <link href="css/todo-app.css" rel="stylesheet">
+        <link href="../css/todo-app.css" rel="stylesheet">
 
-    </head>
+        <link href="../css/login-profile.css" rel="stylesheet">
+</head>
     
     <body id="top">
 
@@ -33,9 +34,9 @@
 
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="/html/index.html">
                         <i class="bi-back"></i>
-                        <span>Micro Projects</span>
+                        <span>Projects</span>
                     </a>
 
                     <div class="d-lg-none ms-auto me-4">
@@ -49,28 +50,28 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-lg-5 me-lg-auto">
                             <li class="nav-item">
-                                <a class="nav-link click-scroll" href="index.html#section_1">Home</a>
+                                <a class="nav-link click-scroll" href="/html/index.html#section_1">Home</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link click-scroll" href="index.html#section_2">Browse Topics</a>
+                                <a class="nav-link click-scroll" href="/html/index.html#section_2">Browse Topics</a>
                             </li>
     
                             <li class="nav-item">
-                                <a class="nav-link click-scroll" href="index.html#section_3">How it works</a>
+                                <a class="nav-link click-scroll" href="/html/index.html#section_3">How it works</a>
                             </li>
     
                             <li class="nav-item">
-                                <a class="nav-link click-scroll" href="index.html#section_5">Contact</a>
+                                <a class="nav-link click-scroll" href="/html/index.html#section_5">Contact</a>
                             </li>
                             
                             <li class="nav-item">
-                                <a class="nav-link click-scroll" href="login.html">Add Project</a>
+                                <a class="nav-link click-scroll" href="/html/student-login.html">Add Project</a>
                             </li>
 
                         </ul>
                         <div class="d-none d-lg-block">
-                            <a href="login.html" class="navbar-icon bi-person smoothscroll"></a>
+                            <a href="/html/student-login.html" class="navbar-icon bi-person" onclick="window.location.href='/html/student-login.html'; return false;"></a>
                         </div>
                     </div>
                 </div>
@@ -84,7 +85,7 @@
                         <div class="col-lg-5 col-12 mb-5">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Homepage</a></li>
+                                    <li class="breadcrumb-item"><a href="/html/index.html">Homepage</a></li>
 
                                     <li class="breadcrumb-item active" aria-current="page">To-Do App</li>
                                 </ol>
@@ -99,7 +100,7 @@
 
                         <div class="col-lg-5 col-12">
                             <div class="topics-detail-block bg-white shadow-lg">
-                                <img src="images/To-Do.png" class="topics-detail-block-image img-fluid">
+                                <img src="../images/To-Do.png" class="topics-detail-block-image img-fluid">
                             </div>
                         </div>
 
@@ -159,9 +160,9 @@
                 <div class="row">
 
                     <div class="col-lg-3 col-12 mb-4 pb-2">
-                        <a class="navbar-brand mb-2" href="index.html">
+                        <a class="navbar-brand mb-2" href="/html/index.html">
                             <i class="bi-back"></i>
-                            <span>Micro Projects</span>
+                            <span>Projects</span>
                         </a>
                     </div>
 
@@ -170,19 +171,19 @@
 
                         <ul class="site-footer-links">
                             <li class="site-footer-link-item">
-                                <a href="index.html" class="site-footer-link">Home</a>
+                                <a href="/html/index.html" class="site-footer-link">Home</a>
                             </li>
 
                             <li class="site-footer-link-item">
-                                <a href="index.html#section_3" class="site-footer-link">How it works</a>
+                                <a href="/html/index.html#section_3" class="site-footer-link">How it works</a>
                             </li>
 
                             <li class="site-footer-link-item">
-                                <a href="index.html#section_2" class="site-footer-link">Browse Projects</a>
+                                <a href="/html/index.html#section_2" class="site-footer-link">Browse Projects</a>
                             </li>
 
                             <li class="site-footer-link-item">
-                                <a href="index.html#section_5" class="site-footer-link">Contact</a>
+                                <a href="/html/index.html#section_5" class="site-footer-link">Contact</a>
                             </li>
                         </ul>
                     </div>
@@ -197,8 +198,8 @@
                         </p>
 
                         <p class="text-white d-flex">
-                            <a href="mailto:mp@gmail.com" class="site-footer-link">
-                                mp@gmail.com
+                            <a href="mailto:projects@gmail.com" class="site-footer-link">
+                                projects@gmail.com
                             </a>
                         </p>
                     </div>
@@ -208,11 +209,25 @@
         </footer>
 
         <!-- JAVASCRIPT FILES -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/jquery.sticky.js"></script>
-        <script src="js/custom.js"></script>
-        <script src="js/todo-app.js"></script>
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script src="../js/jquery.sticky.js"></script>
+        <script src="../js/custom.js"></script>
+        <script src="../js/todo-app.js"></script>
 
-    </body>
+    <script src="../js/login-debug.js"></script>
+<script src="../js/keyboard-shortcuts.js"></script>
+<script src="../js/login-profile.js"></script>
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

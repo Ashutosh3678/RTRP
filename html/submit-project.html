@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Project - Micro Projects</title>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/bootstrap-icons.css">
-    <link rel="stylesheet" href="./css/templatemo-topic-listing.css">
+    <title>Submit Project - Projects</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/templatemo-topic-listing.css">
     <style>
         .form-container {
             background-color: #f8f9fa;
@@ -22,14 +22,15 @@
             display: none;
         }
     </style>
+    <link href="../css/login-profile.css" rel="stylesheet">
 </head>
 <body>
     <main>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="/html/index.html">
                     <i class="bi-back"></i>
-                    <span>Micro Projects</span>
+                    <span>Projects</span>
                 </a>
 
                 <div class="d-lg-none ms-auto me-4">
@@ -43,21 +44,21 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-lg-5 me-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html">Home</a>
+                            <a class="nav-link click-scroll" href="/html/index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="repeated.html">Projects</a>
+                            <a class="nav-link click-scroll" href="/html/repeated.html">Projects</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link click-scroll active" href="submit-project.html">Submit Project</a>
+                            <a class="nav-link click-scroll active" href="/html/submit-project.html">Submit Project</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="contact.html">Contact</a>
+                            <a class="nav-link click-scroll" href="/html/contact.html">Contact</a>
                         </li>
                     </ul>
 
                     <div class="d-none d-lg-block">
-                        <a href="login.html" class="navbar-icon bi-person smoothscroll"></a>
+                        <a href="/html/student-login.html" class="navbar-icon bi-person" onclick="window.location.href='/html/student-login.html'; return false;"></a>
                     </div>
                 </div>
             </div>
@@ -69,7 +70,7 @@
                     <div class="col-lg-5 col-12">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/html/index.html">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Submit Project</li>
                             </ol>
                         </nav>
@@ -95,7 +96,7 @@
                                 There was an error submitting your project. Please try again.
                             </div>
                             
-                            <form id="project-submission-form" action="https://formspree.io/f/ashutoshsingh2081@gmail.com" method="POST">
+                            <form id="project-submission-form">
                                 <div class="form-group">
                                     <label for="title">Project Title *</label>
                                     <input type="text" class="form-control" id="title" name="title" required>
@@ -133,13 +134,6 @@
                                         <option value="Machine Learning">Machine Learning</option>
                                     </select>
                                 </div>
-
-                                <!-- Hidden field to identify this is a project submission -->
-                                <input type="hidden" name="form-type" value="project-submission">
-                                
-                                <!-- Hidden fields for form configuration -->
-                                <input type="hidden" name="_to" value="ashutoshsingh2081@gmail.com">
-                                <input type="hidden" name="_subject" value="New Project Submission">
                                 
                                 <div class="text-center">
                                     <button type="submit" class="btn custom-btn">Submit Project</button>
@@ -156,9 +150,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-12 mb-4 pb-2">
-                    <a class="navbar-brand mb-2" href="index.html">
+                    <a class="navbar-brand mb-2" href="/html/index.html">
                         <i class="bi-back"></i>
-                        <span>Micro Projects</span>
+                        <span>Projects</span>
                     </a>
                 </div>
 
@@ -167,11 +161,11 @@
 
                     <ul class="site-footer-links">
                         <li class="site-footer-link-item">
-                            <a href="index.html" class="site-footer-link">Home</a>
+                            <a href="/html/index.html" class="site-footer-link">Home</a>
                         </li>
 
                         <li class="site-footer-link-item">
-                            <a href="repeated.html" class="site-footer-link">Projects</a>
+                            <a href="/html/repeated.html" class="site-footer-link">Projects</a>
                         </li>
 
                         <li class="site-footer-link-item">
@@ -179,7 +173,7 @@
                         </li>
 
                         <li class="site-footer-link-item">
-                            <a href="contact.html" class="site-footer-link">Contact</a>
+                            <a href="/html/contact.html" class="site-footer-link">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -194,8 +188,8 @@
                     </p>
 
                     <p class="text-white d-flex">
-                        <a href="mailto:mp@gmail.com" class="site-footer-link">
-                            mp@gmail.com
+                        <a href="mailto:projects@gmail.com" class="site-footer-link">
+                            projects@gmail.com
                         </a>
                     </p>
                 </div>
@@ -213,54 +207,46 @@
                         </ul>
                     </div>
 
-                    <p class="copyright-text mt-lg-5 mt-4">Copyright © 2024 Micro Projects. All rights reserved.
+                    <p class="copyright-text mt-lg-5 mt-4">Copyright © 2024 Projects. All rights reserved.
                     </p>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/bootstrap.bundle.min.js"></script>
-    <script src="./js/jquery.sticky.js"></script>
-    <script src="./js/custom.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery.sticky.js"></script>
+    <script src="../js/custom.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('project-submission-form');
             const successMessage = document.getElementById('success-message');
             const errorMessage = document.getElementById('error-message');
-
+            
+            // Check if user is logged in
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const user = isLoggedIn ? JSON.parse(localStorage.getItem('user')) : null;
+            
+            // Pre-fill form if user is logged in
+            if (isLoggedIn && user) {
+                if (user.username) {
+                    document.getElementById('studentName').value = user.username;
+                }
+            }
+            
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
-                // Submit to Formspree
-                fetch(form.action, {
-                    method: form.method,
-                    body: new FormData(form),
-                    headers: {
-                        'Accept': 'application/json'
+                // Recommend login but don't require it
+                if (!isLoggedIn) {
+                    if (!confirm('It is recommended to login before submitting a project. Continue without logging in?')) {
+                        window.location.href = '/html/student-login.html';
+                        return;
                     }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.ok) {
-                        // Submit to our backend API
-                        submitToBackend();
-                    } else {
-                        // Show error message
-                        errorMessage.style.display = 'block';
-                        successMessage.style.display = 'none';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    errorMessage.style.display = 'block';
-                    successMessage.style.display = 'none';
-                });
-            });
-
-            // Function to submit to our backend
-            function submitToBackend() {
+                }
+                
+                // Get form data
                 const formData = {
                     title: document.getElementById('title').value,
                     description: document.getElementById('description').value,
@@ -269,37 +255,66 @@
                     email: document.getElementById('email').value,
                     category: document.getElementById('category').value
                 };
-
-                fetch('/api/submissions', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                })
-                .then(response => response.json())
-                .then(data => {
+                
+                try {
+                    // Show loading state
+                    const submitBtn = document.querySelector('button[type="submit"]');
+                    const originalBtnText = submitBtn.textContent;
+                    submitBtn.textContent = 'Submitting...';
+                    submitBtn.disabled = true;
+                    
+                    // Submit to our backend API
+                    const response = await fetch('/api/submissions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    const data = await response.json();
+                    
                     if (data.success) {
                         // Show success message
                         successMessage.style.display = 'block';
                         errorMessage.style.display = 'none';
                         form.reset();
                     } else {
-                        // Show error message but note that it was sent to Formspree
-                        errorMessage.textContent = 'Your submission was received by Formspree but could not be processed by our system. An administrator will review it.';
+                        // Show error message
+                        errorMessage.textContent = data.message || 'Error submitting project. Please try again.';
                         errorMessage.style.display = 'block';
                         successMessage.style.display = 'none';
                     }
-                })
-                .catch(error => {
-                    console.error('Backend Error:', error);
-                    // Show partial success message
-                    errorMessage.textContent = 'Your submission was received by Formspree but could not be processed by our system. An administrator will review it.';
+                    
+                    // Reset button state
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                } catch (error) {
+                    console.error('Error:', error);
+                    errorMessage.textContent = 'Connection error. Please try again later.';
                     errorMessage.style.display = 'block';
                     successMessage.style.display = 'none';
-                });
-            }
+                    
+                    // Reset button state
+                    const submitBtn = document.querySelector('button[type="submit"]');
+                    submitBtn.textContent = 'Submit Project';
+                    submitBtn.disabled = false;
+                }
+            });
         });
     </script>
+<script src="../js/login-debug.js"></script>
+<script src="../js/keyboard-shortcuts.js"></script>
+<script src="../js/login-profile.js"></script>
 </body>
 </html> 
+
+
+
+
+
+
+
+
+
+

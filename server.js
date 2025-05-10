@@ -33,6 +33,7 @@ mongoose.connect('mongodb+srv://ashutoshsingh2081:ashutoshsingh2081@rtrp.7sfxwhx
 
 // Static files - serve the frontend
 app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'html')));
 
 // API routes
 app.use('/api/users', userRoutes);
@@ -41,9 +42,20 @@ app.use('/api/todos', todoRoutes);
 app.use('/api/submissions', submissionRoutes);
 app.use('/api/formspree-submissions', formspreeRoutes);
 
-// Serve index.html for all other routes (for client-side routing)
+// Handle HTML file requests
+app.get('*.html', (req, res, next) => {
+    const htmlPath = path.join(__dirname, req.path);
+    res.sendFile(htmlPath, err => {
+        if (err) {
+            console.error(`Error serving ${req.path}:`, err);
+            next(); // Pass to the next handler if file not found
+        }
+    });
+});
+
+// Serve index.html for non-matching routes (for client-side routing)
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'html', 'index.html'));
 });
 
 // Start server
