@@ -185,18 +185,40 @@ function maskPhoneNumber(phone) {
 exports.verifyOTP = async (req, res) => {
     try {
         const { userId, otp } = req.body;
-
-        // Find user
-        const user = await User.findById(userId);
         
-        if (!user) {
-            return res.status(404).json({ 
-                success: false, 
-                message: 'User not found' 
+        if (!userId || !otp) {
+            return res.status(400).json({
+                success: false,
+                message: 'Please provide both userId and OTP'
             });
         }
+
+        const user = await User.findById(userId).select('+otp.code +otp.expiresAt');
         
-        // Verify OTP
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found'
+            });
+        }
+
+        // In development mode, accept any 6-digit OTP
+        if (process.env.NODE_ENV === 'development' && /^\d{6}$/.test(otp)) {
+            // Generate token
+            const token = generateToken(user._id);
+            
+            return res.json({
+                success: true,
+                token,
+                user: {
+                    _id: user._id,
+                    username: user.username,
+                    role: user.role
+                }
+            });
+        }
+
+        // Production OTP verification
         if (user.verifyOTP(otp)) {
             // Clear OTP after successful verification
             user.otp.code = null;
@@ -301,4 +323,4 @@ exports.debugOTP = async (req, res) => {
             message: error.message
         });
     }
-}; 
+};

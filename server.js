@@ -1,9 +1,9 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
 const path = require('path');
 const dotenv = require('dotenv');
+const connectDB = require('./config/db');
 
 // Import routes
 const userRoutes = require('./routes/userRoutes');
@@ -18,18 +18,17 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Connect to database
+connectDB();
+
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(morgan('dev'));
 
-// Database connection
-mongoose.connect('mongodb+srv://ashutoshsingh2081:ashutoshsingh2081@rtrp.7sfxwhx.mongodb.net/?retryWrites=true&w=majority&appName=RTRP', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => console.log('MongoDB connected successfully'))
-.catch(err => console.error('MongoDB connection error:', err));
+// Development logging
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
 
 // Static files - serve the frontend
 app.use(express.static(path.join(__dirname)));
@@ -58,7 +57,26 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'index.html'));
 });
 
+// Development error handling
+if (process.env.NODE_ENV === 'development') {
+    app.use((err, req, res, next) => {
+        console.error(err.stack);
+        res.status(500).json({
+            success: false,
+            error: err.message,
+            stack: err.stack
+        });
+    });
+} else {
+    app.use((err, req, res, next) => {
+        res.status(500).json({
+            success: false,
+            error: 'Internal Server Error'
+        });
+    });
+}
+
 // Start server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-}); 
+});

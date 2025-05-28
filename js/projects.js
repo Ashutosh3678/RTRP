@@ -1,29 +1,84 @@
 document.addEventListener('DOMContentLoaded', () => {
     const projectsContainer = document.getElementById('projects-container');
     const paginationContainer = document.getElementById('pagination-container');
-    const ITEMS_PER_PAGE = 6; // Number of items to show per page
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const ITEMS_PER_PAGE = 6;
     let currentPage = 1;
     let totalPages = 0;
     let allProjects = [];
+    let filteredProjects = [];
 
-    // Fetch projects from the database
+    // Search functionality
+    const searchProjects = (searchTerm) => {
+        searchTerm = searchTerm.toLowerCase().trim();
+        
+        if (!searchTerm) {
+            filteredProjects = [];
+            renderProjects(currentPage);
+            renderPagination();
+            return;
+        }
+        
+        filteredProjects = allProjects.filter(project => {
+            const titleMatch = project.title.toLowerCase().includes(searchTerm);
+            const descriptionMatch = project.description.toLowerCase().includes(searchTerm);
+            return titleMatch || descriptionMatch;
+        });
+        
+        totalPages = Math.ceil(filteredProjects.length / ITEMS_PER_PAGE);
+        currentPage = 1;
+        renderProjects(currentPage);
+        renderPagination();
+        
+        // Scroll to results if found
+        if (filteredProjects.length > 0) {
+            projectsContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    // Search event listeners
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.trim();
+            if (!searchTerm) {
+                filteredProjects = [];
+                renderProjects(currentPage);
+                renderPagination();
+            }
+        });
+
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                searchProjects(searchInput.value);
+            }
+        });
+    }
+
+    if (searchButton) {
+        searchButton.addEventListener('click', () => {
+            searchProjects(searchInput.value);
+        });
+    }
+
+    // Handle search from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const keywordParam = urlParams.get('keyword');
+    if (keywordParam) {
+        searchInput.value = keywordParam;
+        searchProjects(keywordParam);
+    }
+
+    // Fetch projects from API
     const fetchProjects = async () => {
         try {
-            const response = await fetch('/api/projects?sort=popularity', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch projects');
-            }
-
-            const data = await response.json();
+            const response = await fetch('/api/projects?sort=popularity');
+            if (!response.ok) throw new Error('Failed to fetch projects');
             
+            const data = await response.json();
             if (data.success && data.data.length > 0) {
-                allProjects = data.data.sort((a, b) => b.popularity - a.popularity); // Sort by popularity
+                allProjects = data.data.sort((a, b) => b.popularity - a.popularity);
                 totalPages = Math.ceil(allProjects.length / ITEMS_PER_PAGE);
                 renderProjects(currentPage);
                 renderPagination();
@@ -31,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 projectsContainer.innerHTML = '<div class="text-center my-5"><p>No projects found.</p></div>';
             }
         } catch (error) {
-            console.error('Error fetching projects:', error);
+            console.error('Error:', error);
             projectsContainer.innerHTML = `
                 <div class="text-center my-5">
                     <p>Error loading projects. Please try again later.</p>
@@ -41,50 +96,53 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Get category badge class based on project category
+    // Get badge class for project category
     const getCategoryBadgeClass = (category) => {
         const categoryClasses = {
             'Web Development': 'bg-design',
             'IOT': 'bg-advertising',
             'App Development': 'bg-finance',
-            'API Development': 'bg-music',
-            'UI/UX': 'bg-education',
-            'Machine Learning': 'bg-design'
+            'Machine Learning': 'bg-music',
+            'UI/UX': 'bg-education'
         };
-        
         return categoryClasses[category] || 'bg-secondary';
     };
 
-    // Render projects for the current page
+    // Render projects
     const renderProjects = (page) => {
         const startIndex = (page - 1) * ITEMS_PER_PAGE;
         const endIndex = startIndex + ITEMS_PER_PAGE;
-        const projectsToShow = allProjects.slice(startIndex, endIndex);
+        const projectsList = filteredProjects.length > 0 ? filteredProjects : allProjects;
+        const projectsToShow = projectsList.slice(startIndex, endIndex);
         
         if (projectsToShow.length === 0) {
-            projectsContainer.innerHTML = '<div class="text-center my-5"><p>No projects found for this page.</p></div>';
+            if (searchInput.value.trim()) {
+                projectsContainer.innerHTML = `
+                    <div class="text-center my-5">
+                        <h4 class="mb-3">No projects found</h4>
+                        <p class="text-muted">No projects found matching "${searchInput.value}". Try different keywords or check your spelling.</p>
+                        <button class="btn custom-btn mt-3" onclick="window.location.reload()">View All Projects</button>
+                    </div>`;
+            } else {
+                projectsContainer.innerHTML = '<div class="text-center my-5"><p>Loading projects...</p></div>';
+            }
             return;
         }
         
         let html = '';
-        
         projectsToShow.forEach(project => {
             const badgeClass = getCategoryBadgeClass(project.category);
-            const description = project.description || 'No description available';
-            
             html += `
                 <div class="custom-block custom-block-topics-listing bg-white shadow-lg mb-5">
                     <div class="d-flex">
                         <img src="${project.imageUrl}" class="custom-block-image img-fluid" alt="${project.title}">
-
                         <div class="custom-block-topics-listing-info d-flex">
                             <div>
                                 <h5 class="mb-2">${project.title}</h5>
-                                <p class="mb-0">${description}</p>
+                                <p class="mb-0">${project.description}</p>
                                 <p class="mb-1"><small class="text-muted">Category: ${project.category}</small></p>
                                 <a href="#" class="btn custom-btn mt-3 mt-lg-4" onclick="viewProjectDetails('${project._id}')">Learn More</a>
                             </div>
-
                             <span class="badge ${badgeClass} rounded-pill ms-auto">${project.popularity}</span>
                         </div>
                     </div>
@@ -97,10 +155,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Render pagination
     const renderPagination = () => {
-        let html = '';
+        if (totalPages <= 1) {
+            paginationContainer.innerHTML = '';
+            return;
+        }
         
-        // Previous button
-        html += `
+        let html = `
             <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
                 <a class="page-link" href="javascript:void(0)" onclick="changePage(${currentPage - 1})" aria-label="Previous">
                     <span aria-hidden="true">Prev</span>
@@ -108,7 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </li>
         `;
         
-        // Page numbers
         for (let i = 1; i <= totalPages; i++) {
             html += `
                 <li class="page-item ${i === currentPage ? 'active' : ''}" aria-current="page">
@@ -117,7 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }
         
-        // Next button
         html += `
             <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
                 <a class="page-link" href="javascript:void(0)" onclick="changePage(${currentPage + 1})" aria-label="Next">
@@ -129,33 +187,23 @@ document.addEventListener('DOMContentLoaded', () => {
         paginationContainer.innerHTML = html;
     };
 
-    // Change page
+    // Change page function
     window.changePage = (page) => {
         if (page < 1 || page > totalPages) return;
-        
         currentPage = page;
         renderProjects(currentPage);
         renderPagination();
-        
-        // Scroll to top of projects section
         projectsContainer.scrollIntoView({ behavior: 'smooth' });
     };
 
     // View project details
     window.viewProjectDetails = (projectId) => {
-        // You can redirect to a project detail page or show a modal with project details
-        // For now, we'll just log the project ID
-        console.log('Viewing project:', projectId);
-        
-        // Increment popularity count in the backend
         fetch(`/api/projects/${projectId}`, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).catch(error => console.error('Error incrementing popularity:', error));
+            headers: { 'Content-Type': 'application/json' }
+        }).catch(error => console.error('Error:', error));
     };
 
-    // Start fetching projects
+    // Initialize by fetching projects
     fetchProjects();
-}); 
+});
