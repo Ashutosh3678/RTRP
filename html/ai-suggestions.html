@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Project Suggestions</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap-icons.css" rel="stylesheet">
+    <link href="../css/templatemo-topic-listing.css" rel="stylesheet">
+    <link href="../css/login-profile.css" rel="stylesheet">
+    <style>
+        @media (max-width: 767px) {
+            .hero-section {
+                padding: 30px 0 10px 0 !important;
+            }
+            .custom-form {
+                padding: 20px 10px !important;
+            }
+            .custom-form .form-control, .custom-form select, .custom-btn {
+                font-size: 1rem !important;
+                padding: 10px !important;
+            }
+            h1.text-white.text-center {
+                font-size: 2rem !important;
+            }
+            h6.text-center {
+                font-size: 1rem !important;
+            }
+            #suggestions-result .card {
+                font-size: 0.95rem;
+            }
+        }
+        /* 3D card and button effects */
+        .custom-block, .card {
+            transition: transform 0.3s cubic-bezier(.25,.8,.25,1), box-shadow 0.3s;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 1.5px 6px rgba(0,0,0,0.08);
+        }
+        .custom-block:hover, .card:hover {
+            transform: translateY(-8px) scale(1.03) perspective(600px) rotateX(2deg) rotateY(-2deg);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.18), 0 3px 12px rgba(0,0,0,0.12);
+        }
+        .custom-btn, .btn {
+            transition: transform 0.2s cubic-bezier(.25,.8,.25,1), box-shadow 0.2s;
+        }
+        .custom-btn:hover, .btn:hover {
+            transform: scale(1.05) perspective(400px) rotateX(2deg);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+        }
+        /* Entrance animation */
+        .main-animate {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            animation: fadeInUp 0.8s cubic-bezier(.25,.8,.25,1) 0.2s forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+        /* Vanta background container */
+        #vanta-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 0;
+        }
+        main, .hero-section, .site-footer, .main-animate {
+            position: relative;
+            z-index: 1;
+        }
+        /* Redesigned Get Suggestions button */
+        #ai-suggestion-form .custom-btn {
+            background: linear-gradient(90deg, #1abc9c 0%, #3498db 100%);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 2rem;
+            box-shadow: 0 4px 16px rgba(52,152,219,0.18), 0 1.5px 6px rgba(26,188,156,0.18);
+            transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+            letter-spacing: 1px;
+            padding: 0.85rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        #ai-suggestion-form .custom-btn:before {
+            content: '';
+            position: absolute;
+            left: -75%;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: rgba(255,255,255,0.18);
+            transform: skewX(-20deg);
+            transition: left 0.4s cubic-bezier(.25,.8,.25,1);
+        }
+        #ai-suggestion-form .custom-btn:hover:before {
+            left: 120%;
+        }
+        #ai-suggestion-form .custom-btn:hover {
+            background: linear-gradient(90deg, #3498db 0%, #1abc9c 100%);
+            transform: scale(1.07) perspective(400px) rotateX(2deg);
+            box-shadow: 0 8px 24px rgba(52,152,219,0.28), 0 3px 12px rgba(26,188,156,0.18);
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+</head>
+<body id="top">
+    <div id="vanta-bg"></div>
+    <main class="main-animate">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi-back"></i>
+                    <span>Projects</span>
+                </a>
+                <div class="d-lg-none ms-auto me-4">
+                    <a href="student-login.html" class="navbar-icon bi-person" onclick="window.location.href='student-login.html'; return false;"></a>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                        <li class="nav-item"><a class="nav-link click-scroll" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link click-scroll" href="repeated.html">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link click-scroll" href="submit-project.html">Submit Project</a></li>
+                        <li class="nav-item"><a class="nav-link click-scroll" href="contact.html">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link click-scroll active" href="ai-suggestions.html">AI Suggestions</a></li>
+                    </ul>
+                    <div class="d-none d-lg-block">
+                        <a href="student-login.html" class="navbar-icon bi-person" onclick="window.location.href='student-login.html'; return false;"></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-12 mx-auto">
+                        <h1 class="text-white text-center">AI Project Suggestions</h1>
+                        <h6 class="text-center">Get personalized project ideas powered by AI</h6>
+                        <form id="ai-suggestion-form" class="custom-form mt-4 pt-2 mb-lg-0 mb-5">
+                            <div class="mb-3">
+                                <label for="interests" class="form-label">Interests (comma separated)</label>
+                                <input type="text" class="form-control" id="interests" placeholder="e.g. web development, machine learning">
+                            </div>
+                            <div class="mb-3">
+                                <label for="skills" class="form-label">Skills (comma separated)</label>
+                                <input type="text" class="form-control" id="skills" placeholder="e.g. JavaScript, Python, React">
+                            </div>
+                            <div class="mb-3">
+                                <label for="difficulty" class="form-label">Difficulty</label>
+                                <select class="form-control" id="difficulty">
+                                    <option value="beginner">Beginner</option>
+                                    <option value="intermediate">Intermediate</option>
+                                    <option value="advanced">Advanced</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn custom-btn w-100">Get Suggestions</button>
+                        </form>
+                        <div id="suggestions-result" class="mt-4"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <p class="copyright-text mt-lg-5 mt-4">Copyright © 2025 Projects. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery.sticky.js"></script>
+    <script src="../js/click-scroll.js"></script>
+    <script src="../js/ai-suggestions.js"></script>
+    <script>
+    // Vanta.js 3D animated background
+    window.addEventListener('DOMContentLoaded', function() {
+      if (window.VANTA) {
+        VANTA.WAVES({
+          el: "#vanta-bg",
+          mouseControls: true,
+          touchControls: true,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.0,
+          scaleMobile: 1.0,
+          color: 0x1abc9c,
+          shininess: 50.0,
+          waveHeight: 20.0,
+          waveSpeed: 0.7,
+          zoom: 0.85
+        });
+      }
+    });
+    </script>
+</body>
+</html> 

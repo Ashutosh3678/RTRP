@@ -11,6 +11,7 @@ const projectRoutes = require('./routes/projectRoutes');
 const todoRoutes = require('./routes/todoRoutes');
 const submissionRoutes = require('./routes/submissionRoutes');
 const formspreeRoutes = require('./routes/formspreeRoutes');
+const aiRoutes = require('./routes/aiRoutes');
 
 // Load environment variables
 dotenv.config();
@@ -24,11 +25,8 @@ connectDB();
 // Middleware
 app.use(cors());
 app.use(express.json());
-
-// Development logging
-if (process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'));
-}
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
 
 // Static files - serve the frontend
 app.use(express.static(path.join(__dirname)));
@@ -40,6 +38,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/todos', todoRoutes);
 app.use('/api/submissions', submissionRoutes);
 app.use('/api/formspree-submissions', formspreeRoutes);
+app.use('/api/ai', aiRoutes);
 
 // Handle HTML file requests
 app.get('*.html', (req, res, next) => {
@@ -47,7 +46,7 @@ app.get('*.html', (req, res, next) => {
     res.sendFile(htmlPath, err => {
         if (err) {
             console.error(`Error serving ${req.path}:`, err);
-            next(); // Pass to the next handler if file not found
+            next();
         }
     });
 });
@@ -57,24 +56,14 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'index.html'));
 });
 
-// Development error handling
-if (process.env.NODE_ENV === 'development') {
-    app.use((err, req, res, next) => {
-        console.error(err.stack);
-        res.status(500).json({
-            success: false,
-            error: err.message,
-            stack: err.stack
-        });
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({
+        success: false,
+        error: err.message
     });
-} else {
-    app.use((err, req, res, next) => {
-        res.status(500).json({
-            success: false,
-            error: 'Internal Server Error'
-        });
-    });
-}
+});
 
 // Start server
 app.listen(PORT, () => {

@@ -24,6 +24,50 @@
 
         <link href="../css/login-profile.css" rel="stylesheet">
     <style>
+        @media (max-width: 767px) {
+            .hero-section {
+                padding: 30px 0 10px 0 !important;
+            }
+            .custom-form {
+                padding: 20px 10px !important;
+            }
+            .custom-form .form-control, .custom-form select, .custom-btn {
+                font-size: 1rem !important;
+                padding: 10px !important;
+            }
+            h1.text-white.text-center {
+                font-size: 2rem !important;
+            }
+            h6.text-center {
+                font-size: 1rem !important;
+            }
+        }
+        .custom-block, .card {
+            transition: transform 0.3s ease, box-shadow 0.3s;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+        .custom-block:hover, .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+        .custom-btn, .btn {
+            transition: transform 0.2s ease, box-shadow 0.2s;
+        }
+        .custom-btn:hover, .btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+        }
+        .main-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
         .site-header {
             padding-bottom: 60px;
         }
@@ -49,12 +93,44 @@
             color: var(--white-color);
             max-width: 150px;
         }
+        .site-footer {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(45deg, #1abc9c, #3498db);
+            animation: gradientBG 15s ease infinite;
+            background-size: 400% 400%;
+        }
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            z-index: -1;
+        }
+        .site-footer .container {
+            position: relative;
+            z-index: 2;
+        }
     </style>
 </head>
     
     <body class="topics-listing-page" id="top">
-
-        <main>
+        <main class="main-animate">
 
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
@@ -91,6 +167,10 @@
 
                             <li class="nav-item">
                                 <a class="nav-link click-scroll" href="/html/submit-project.html">Submit Project</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link click-scroll" href="ai-suggestions.html">AI Suggestions</a>
                             </li>
 
 
@@ -154,60 +234,42 @@
             
         </main>
 
-		<footer class="site-footer section-padding">
-            <div class="container">
+		<footer class="site-footer section-padding" style="position:relative;overflow:hidden;">
+            <div id="vanta-footer" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;"></div>
+            <div class="container" style="position:relative;z-index:1; color: #111;">
                 <div class="row">
-
                     <div class="col-lg-3 col-12 mb-4 pb-2">
-                        <a class="navbar-brand mb-2" href="/html/index.html">
+                        <a class="navbar-brand mb-2" href="/html/index.html" style="color:#111;">
                             <i class="bi-back"></i>
                             <span>Projects</span>
                         </a>
                     </div>
-
                     <div class="col-lg-3 col-md-4 col-6">
-                        <h6 class="site-footer-title mb-3">Resources</h6>
-
+                        <h6 class="site-footer-title mb-3" style="color:#111;">Resources</h6>
                         <ul class="site-footer-links">
                             <li class="site-footer-link-item">
-                                <a href="/html/index.html" class="site-footer-link">Home</a>
+                                <a href="/html/index.html" class="site-footer-link" style="color:#111;">Home</a>
                             </li>
-
                             <li class="site-footer-link-item">
-                                <a href="/html/index.html#section_3" class="site-footer-link">How it works</a>
+                                <a href="/html/index.html#section_3" class="site-footer-link" style="color:#111;">How it works</a>
                             </li>
-
                             <li class="site-footer-link-item">
-                                <a href="/html/index.html#section_4" class="site-footer-link">Contact</a>
+                                <a href="/html/index.html#section_4" class="site-footer-link" style="color:#111;">Contact</a>
                             </li>
-
                             <li class="site-footer-link-item">
-                                <a href="/html/index.html#section_2" class="site-footer-link">Browse Projects</a>
+                                <a href="/html/index.html#section_2" class="site-footer-link" style="color:#111;">Browse Projects</a>
                             </li>
                         </ul>
                     </div>
-
                     <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
-                        <h6 class="site-footer-title mb-3">Information</h6>
-
-                        <p class="text-white d-flex mb-1">
-                            <a href="tel: 305-240-9671" class="site-footer-link">
-                                7207802423
-                            </a>
+                        <h6 class="site-footer-title mb-3" style="color:#111;">Information</h6>
+                        <p class="d-flex mb-1" style="color:#111;">
+                            <a href="tel: 305-240-9671" class="site-footer-link" style="color:#111;">7207802423</a>
                         </p>
-
-                        <p class="text-white d-flex">
-                            <a href="mailto:info@company.com" class="site-footer-link">
-                                mp.cie@gmail.com
-                            </a>
+                        <p class="d-flex" style="color:#111;">
+                            <a href="mailto:info@company.com" class="site-footer-link" style="color:#111;">mp.cie@gmail.com</a>
                         </p>
                     </div>
-
-                    <!-- <div class="col-lg-3 col-md-4 col-12 mt-4 mt-lg-0 ms-auto">
-                        <p class="copyright-text mt-lg-5 mt-4">Copyright © 2023 Projects. All rights reserved.
-                        </p>                        
-                    </div> -->
-
                 </div>
             </div>
         </footer>
@@ -405,6 +467,28 @@
     <script src="../js/login-debug.js"></script>
 <script src="../js/keyboard-shortcuts.js"></script>
 <script src="../js/login-profile.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+    if (window.VANTA) {
+        VANTA.WAVES({
+            el: "#vanta-footer",
+            mouseControls: true,
+            touchControls: true,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.0,
+            scaleMobile: 1.0,
+            color: 0x1abc9c,
+            shininess: 50.0,
+            waveHeight: 20.0,
+            waveSpeed: 0.7,
+            zoom: 0.85
+        });
+    }
+});
+</script>
 </body>
 </html>
 

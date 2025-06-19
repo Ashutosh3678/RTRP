@@ -24,13 +24,93 @@
 
         <link href="../css/login-profile.css" rel="stylesheet">
 
+        <style>
+            @media (max-width: 767px) {
+                .hero-section {
+                    padding: 30px 0 10px 0 !important;
+                }
+                .custom-form {
+                    padding: 20px 10px !important;
+                }
+                .custom-form .form-control, .custom-form select, .custom-btn {
+                    font-size: 1rem !important;
+                    padding: 10px !important;
+                }
+                h1.text-white.text-center {
+                    font-size: 2rem !important;
+                }
+                h6.text-center {
+                    font-size: 1rem !important;
+                }
+            }
+            .custom-block, .card {
+                transition: transform 0.3s ease, box-shadow 0.3s;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            }
+            .custom-block:hover, .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+            }
+            .custom-btn, .btn {
+                transition: transform 0.2s ease, box-shadow 0.2s;
+            }
+            .custom-btn:hover, .btn:hover {
+                transform: scale(1.02);
+                box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+            }
+            .main-animate {
+                opacity: 0;
+                transform: translateY(20px);
+                animation: fadeInUp 0.8s ease 0.2s forwards;
+            }
+            @keyframes fadeInUp {
+                to {
+                    opacity: 1;
+                    transform: none;
+                }
+            }
+            .site-footer {
+                position: relative;
+                z-index: 1;
+                background: linear-gradient(45deg, #1abc9c, #3498db);
+                animation: gradientBG 15s ease infinite;
+                background-size: 400% 400%;
+            }
+            @keyframes gradientBG {
+                0% {
+                    background-position: 0% 50%;
+                }
+                50% {
+                    background-position: 100% 50%;
+                }
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+            .site-footer::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(5px);
+                z-index: -1;
+            }
+            .site-footer .container {
+                position: relative;
+                z-index: 2;
+            }
+        </style>
+
     </head>
     
     <body id="top">
 
         <div id="loader"></div>
 
-        <main>
+        <main class="main-animate">
 
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
@@ -57,9 +137,9 @@
                                 <a class="nav-link click-scroll" href="#section_2">Browse Topics</a>
                             </li>
     
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link click-scroll" href="#section_3">How it works</a>
-                            </li>
+                            </li> -->
 
                             <li class="nav-item">
                                 <a class="nav-link click-scroll" href="repeated.html">Projects</a>
@@ -71,6 +151,10 @@
 
                             <li class="nav-item">
                                 <a class="nav-link click-scroll" href="contact.html">Contact</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link click-scroll" href="ai-suggestions.html">AI Suggestions</a>
                             </li>
 
                         </ul>
@@ -195,7 +279,7 @@
                                 <button class="nav-link" id="marketing-tab" data-bs-toggle="tab" data-bs-target="#marketing-tab-pane" type="button" role="tab" aria-controls="marketing-tab-pane" aria-selected="false">IOT</button>
                             </li>
 
-                            <!-- <li class="nav-item" role="presentation">
+                            <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="finance-tab" data-bs-toggle="tab" data-bs-target="#finance-tab-pane" type="button" role="tab" aria-controls="finance-tab-pane" aria-selected="false">App Development</button>
                             </li>
 
@@ -208,7 +292,7 @@
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="education-tab" data-bs-toggle="tab" data-bs-target="#education-tab-pane" type="button" role="tab" aria-controls="education-tab-pane" aria-selected="false">Machine Learning</button>
-                            </li> -->
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -226,13 +310,10 @@
                                                     <div class="d-flex">
                                                         <div>
                                                             <h5 class="mb-2">Career Guidance Website</h5>
-
-                                                                <p class="mb-0">A website which guides you to select your career.</p>
+                                                            <p class="mb-0">A website which guides you to select your career.</p>
                                                         </div>
-
                                                         <span class="badge bg-design rounded-pill ms-auto">75</span>
                                                     </div>
-
                                                     <img src="../images/topics/undraw_Redesign_feedback_re_jvm0.png" class="custom-block-image img-fluid" alt="">
                                                 </a>
                                             </div>
@@ -244,10 +325,8 @@
                                                     <div class="d-flex">
                                                         <div>
                                                             <h5 class="mb-2">Clubs @ MLRIT</h5>
-
                                                             <p class="mb-0">A website which displays different clubs at MLRIT.</p>
                                                         </div>
-
                                                         <span class="badge bg-design rounded-pill ms-auto">14</span>
                                                     </div>
                                                     <img src="../images/topics/undraw_Remote_design_team_re_urdx.png" class="custom-block-image img-fluid" alt="">
@@ -255,21 +334,16 @@
                                             </div>
                                         </div>
 
-                                        
-
                                         <div class="col-lg-4 col-md-6 col-12">
                                             <div class="custom-block bg-white shadow-lg">
                                                 <a href="ToDo.html">
                                                     <div class="d-flex">
                                                         <div>
                                                             <h5 class="mb-2">To Do App</h5>
-
-                                                                <p class="mb-0">To Do app which records your tasks.</p>
+                                                            <p class="mb-0">To Do app which records your tasks.</p>
                                                         </div>
-
                                                         <span class="badge bg-design rounded-pill ms-auto">100</span>
                                                     </div>
-
                                                     <img src="../images/topics/colleagues-working-cozy-office-medium-shot.png" class="custom-block-image img-fluid" alt="">
                                                 </a>
                                             </div>
@@ -280,218 +354,72 @@
                                 <div class="tab-pane fade" id="marketing-tab-pane" role="tabpanel" aria-labelledby="marketing-tab" tabindex="0">
                                     <div class="row">
                                         <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
-                                                <div class="custom-block bg-white shadow-lg">
-                                                    <a href="plantw.html">
-                                                        <div class="d-flex">
-                                                            <div>
-                                                                <h5 class="mb-2">Plant Watering System</h5>
-
-                                                                <p class="mb-0">Automatic plant watering system using humidity sensor.</p>
-                                                            </div>
-
-                                                            <span class="badge bg-advertising rounded-pill ms-auto">30</span>
-                                                        </div>
-
-                                                        <img src="../images/topics/undraw_online_ad_re_ol62.png" class="custom-block-image img-fluid" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
-                                                <div class="custom-block bg-white shadow-lg">
-                                                    <a href="#">
-                                                        <div class="d-flex">
-                                                            <div>
-                                                                <h5 class="mb-2">Water Level Checker</h5>
-
-                                                                <p class="mb-0">A Device Which Checks Water Level To Avoid Floods</p>
-                                                            </div>
-
-                                                            <span class="badge bg-advertising rounded-pill ms-auto">65</span>
-                                                        </div>
-
-                                                        <img src="../images/topics/undraw_Group_video_re_btu7.png" class="custom-block-image img-fluid" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-4 col-md-6 col-12">
-                                                <div class="custom-block bg-white shadow-lg">
-                                                    <a href="#">
-                                                        <div class="d-flex">
-                                                            <div>
-                                                                <h5 class="mb-2">Water trash collector</h5>
-
-                                                                <p class="mb-0">Collects trash from water bodies using solar</p>
-                                                            </div>
-
-                                                            <span class="badge bg-advertising rounded-pill ms-auto">50</span>
-                                                        </div>
-
-                                                        <img src="../images/topics/undraw_viral_tweet_gndb.png" class="custom-block-image img-fluid" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                  </div>
-
-                                <div class="tab-pane fade" id="finance-tab-pane" role="tabpanel" aria-labelledby="finance-tab" tabindex="0">   <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-12 mb-4 mb-lg-0">
                                             <div class="custom-block bg-white shadow-lg">
-                                                <a href="topics-detail.html">
+                                                <a href="plantw.html">
                                                     <div class="d-flex">
                                                         <div>
-                                                            <h5 class="mb-2">Project b(1)</h5>
-
-                                                            <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                                            <h5 class="mb-2">Plant Watering System</h5>
+                                                            <p class="mb-0">Automatic plant watering system using humidity sensor.</p>
                                                         </div>
-
-                                                        <span class="badge bg-finance rounded-pill ms-auto">30</span>
+                                                        <span class="badge bg-advertising rounded-pill ms-auto">30</span>
                                                     </div>
-
-                                                    <img src="../images/topics/undraw_Finance_re_gnv2.png" class="custom-block-image img-fluid" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6 col-md-6 col-12">
-                                            <div class="custom-block custom-block-overlay">
-                                                <div class="d-flex flex-column h-100">
-                                                    <img src="../images/businesswoman-using-tablet-analysis-graph-company-finance-strategy-statistics-success-concept-planning-future-office-room.jpg" class="custom-block-image img-fluid" alt="">
-
-                                                    <div class="custom-block-overlay-text d-flex">
-                                                        <div>
-                                                            <h5 class="text-white mb-2">Project b(2)</h5>
-
-                                                            <p class="text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint animi necessitatibus aperiam repudiandae nam omnis</p>
-
-                                                            <a href="topics-detail.html" class="btn custom-btn mt-2 mt-lg-3">Learn More</a>
-                                                        </div>
-
-                                                        <span class="badge bg-finance rounded-pill ms-auto">25</span>
-                                                    </div>
-
-                                                    <div class="social-share d-flex">
-                                                        <p class="text-white me-4">Share:</p>
-
-                                                        <ul class="social-icon">
-                                                            <li class="social-icon-item">
-                                                                <a href="#" class="social-icon-link bi-twitter"></a>
-                                                            </li>
-
-                                                            <li class="social-icon-item">
-                                                                <a href="#" class="social-icon-link bi-facebook"></a>
-                                                            </li>
-
-                                                            <li class="social-icon-item">
-                                                                <a href="#" class="social-icon-link bi-pinterest"></a>
-                                                            </li>
-                                                        </ul>
-
-                                                        <a href="#" class="custom-icon bi-bookmark ms-auto"></a>
-                                                    </div>
-
-                                                    <div class="section-overlay"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="tab-pane fade" id="music-tab-pane" role="tabpanel" aria-labelledby="music-tab" tabindex="0">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
-                                            <div class="custom-block bg-white shadow-lg">
-                                                <a href="topics-detail.html">
-                                                    <div class="d-flex">
-                                                        <div>
-                                                            <h5 class="mb-2">Project c(1)</h5>
-
-                                                            <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
-                                                        </div>
-
-                                                        <span class="badge bg-music rounded-pill ms-auto">45</span>
-                                                    </div>
-
-                                                    <img src="../images/topics/undraw_Compose_music_re_wpiw.png" class="custom-block-image img-fluid" alt="">
+                                                    <img src="../images/topics/undraw_online_ad_re_ol62.png" class="custom-block-image img-fluid" alt="">
                                                 </a>
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
                                             <div class="custom-block bg-white shadow-lg">
-                                                <a href="topics-detail.html">
+                                                <a href="#">
                                                     <div class="d-flex">
                                                         <div>
-                                                            <h5 class="mb-2">Project c(2)</h5>
-
-                                                            <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                                            <h5 class="mb-2">Water Level Checker</h5>
+                                                            <p class="mb-0">A Device Which Checks Water Level To Avoid Floods</p>
                                                         </div>
-
-                                                        <span class="badge bg-music rounded-pill ms-auto">45</span>
+                                                        <span class="badge bg-advertising rounded-pill ms-auto">65</span>
                                                     </div>
-
-                                                    <img src="../images/topics/undraw_happy_music_g6wc.png" class="custom-block-image img-fluid" alt="">
+                                                    <img src="../images/topics/undraw_Group_video_re_btu7.png" class="custom-block-image img-fluid" alt="">
                                                 </a>
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-6 col-12">
                                             <div class="custom-block bg-white shadow-lg">
-                                                <a href="topics-detail.html">
+                                                <a href="#">
                                                     <div class="d-flex">
                                                         <div>
-                                                            <h5 class="mb-2">Project c(3)</h5>
-
-                                                            <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                                            <h5 class="mb-2">Water trash collector</h5>
+                                                            <p class="mb-0">Collects trash from water bodies using solar</p>
                                                         </div>
-
-                                                        <span class="badge bg-music rounded-pill ms-auto">20</span>
+                                                        <span class="badge bg-advertising rounded-pill ms-auto">50</span>
                                                     </div>
-
-                                                    <img src="../images/topics/undraw_Podcast_audience_re_4i5q.png" class="custom-block-image img-fluid" alt="">
+                                                    <img src="../images/topics/undraw_viral_tweet_gndb.png" class="custom-block-image img-fluid" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
+                                <div class="tab-pane fade" id="finance-tab-pane" role="tabpanel" aria-labelledby="finance-tab" tabindex="0">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-12 text-center">
+                                            <p class="mb-0">No App Development projects available at the moment.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="music-tab-pane" role="tabpanel" aria-labelledby="music-tab" tabindex="0">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-12 text-center">
+                                            <p class="mb-0">No API Development projects available at the moment.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="tab-pane fade" id="education-tab-pane" role="tabpanel" aria-labelledby="education-tab" tabindex="0">
                                     <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-12 mb-4 mb-lg-3">
-                                            <div class="custom-block bg-white shadow-lg">
-                                                <a href="topics-detail.html">
-                                                    <div class="d-flex">
-                                                        <div>
-                                                            <h5 class="mb-2">Project d(1)</h5>
-
-                                                            <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
-                                                        </div>
-
-                                                        <span class="badge bg-education rounded-pill ms-auto">80</span>
-                                                    </div>
-
-                                                    <img src="../images/topics/undraw_Graduation_re_gthn.png" class="custom-block-image img-fluid" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6 col-md-6 col-12">
-                                            <div class="custom-block bg-white shadow-lg">
-                                                <a href="topics-detail.html">
-                                                    <div class="d-flex">
-                                                        <div>
-                                                            <h5 class="mb-2">Project d(2)</h5>
-
-                                                            <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
-                                                        </div>
-
-                                                        <span class="badge bg-education rounded-pill ms-auto">75</span>
-                                                    </div>
-
-                                                    <img src="../images/topics/undraw_Educator_re_ju47.png" class="custom-block-image img-fluid" alt="">
-                                                </a>
-                                            </div>
+                                        <div class="col-lg-12 col-12 text-center">
+                                            <p class="mb-0">No UI/UX projects available at the moment.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -640,18 +568,14 @@
                             <iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d72391.48330616458!2d78.39076695619717!3d17.526184110894405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb8f3a482cdd45%3A0xe6e64fd6f4bb6256!2sMLRIT%20CIE!5e0!3m2!1sen!2sin!4v1700985861252!5m2!1sen!2sin" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                         <div class="col-lg-3 col-md-6 col-12 mb-3 mb-lg- mb-md-0 ms-auto">
-                            <h4 class="mb-3">MLRIT CIE</h4>
-
+                            <h4 class="mb-3">MLRIT</h4>
                             <p>MLR Institute Of Technology,Dundigal</p>
-
                             <hr>
-
                             <p class="text-white d-flex mb-1">
                                 <a href="tel: 305-240-9671" class="site-footer-link">
                                     7660091140
                                 </a>
                             </p>
-
                             <p class="text-white d-flex">
                                 <a href="mailto:projects@gmail.com" class="site-footer-link">
                                     projects@gmail.com
@@ -668,63 +592,45 @@
             </section>
         </main>
 
-<footer class="site-footer section-padding">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-3 col-12 mb-4 pb-2">
-                        <a class="navbar-brand mb-2" href="index.html">
-                            <i class="bi-back"></i>
-                            <span>Projects</span>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <h6 class="site-footer-title mb-3">Resources</h6>
-
-                        <ul class="site-footer-links">
-                            <li class="site-footer-link-item">
-                                <a href="index.html" class="site-footer-link">Home</a>
-                            </li>
-
-                            <li class="site-footer-link-item">
-                                <a href="index.html#section_3" class="site-footer-link">How it works</a>
-                            </li>
-
-                            <li class="site-footer-link-item">
-                                <a href="index.html#section_2" class="site-footer-link">Browse Projects</a>
-                            </li>
-
-                            <li class="site-footer-link-item">
-                                <a href="index.html#section_5" class="site-footer-link">Contact</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
-                        <h6 class="site-footer-title mb-3">Information</h6>
-
-                        <p class="text-white d-flex mb-1">
-                            <a href="tel: 305-240-9671" class="site-footer-link">
-                                7660091140
-                            </a>
-                        </p>
-
-                        <p class="text-white d-flex">
-                            <a href="mailto:projects@gmail.com" class="site-footer-link">
-                                projects@gmail.com
-                            </a>
-                        </p>
-                    </div>
-
-                    <!-- <div class="col-lg-3 col-md-4 col-12 mt-4 mt-lg-0 ms-auto">
-                        <p class="copyright-text mt-lg-5 mt-4">Copyright © 2023 Projects. All rights reserved.
-                        </p>                        
-                    </div> -->
-
-                </div>
+<footer class="site-footer section-padding" style="position:relative;overflow:hidden;">
+    <div id="vanta-footer" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;"></div>
+    <div class="container" style="position:relative;z-index:1; color: #111;">
+        <div class="row">
+            <div class="col-lg-3 col-12 mb-4 pb-2">
+                <a class="navbar-brand mb-2" href="index.html" style="color:#111;">
+                    <i class="bi-back"></i>
+                    <span>Projects</span>
+                </a>
             </div>
-        </footer>
+            <div class="col-lg-3 col-md-4 col-6">
+                <h6 class="site-footer-title mb-3" style="color:#111;">Resources</h6>
+                <ul class="site-footer-links">
+                    <li class="site-footer-link-item">
+                        <a href="index.html" class="site-footer-link" style="color:#111;">Home</a>
+                    </li>
+                    <li class="site-footer-link-item">
+                        <a href="index.html#section_3" class="site-footer-link" style="color:#111;">How it works</a>
+                    </li>
+                    <li class="site-footer-link-item">
+                        <a href="index.html#section_2" class="site-footer-link" style="color:#111;">Browse Projects</a>
+                    </li>
+                    <li class="site-footer-link-item">
+                        <a href="index.html#section_5" class="site-footer-link" style="color:#111;">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
+                <h6 class="site-footer-title mb-3" style="color:#111;">Information</h6>
+                <p class="d-flex mb-1" style="color:#111;">
+                    <a href="tel: 305-240-9671" class="site-footer-link" style="color:#111;">7660091140</a>
+                </p>
+                <p class="d-flex" style="color:#111;">
+                    <a href="mailto:projects@gmail.com" class="site-footer-link" style="color:#111;">projects@gmail.com</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
 
 
         <!-- JAVASCRIPT FILES -->
@@ -737,6 +643,28 @@
         <script src="../js/login-debug.js"></script>
 
     <script src="../js/keyboard-shortcuts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    <script>
+    window.addEventListener('DOMContentLoaded', function() {
+        if (window.VANTA) {
+            VANTA.WAVES({
+                el: "#vanta-footer",
+                mouseControls: true,
+                touchControls: true,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.0,
+                scaleMobile: 1.0,
+                color: 0x1abc9c,
+                shininess: 50.0,
+                waveHeight: 20.0,
+                waveSpeed: 0.7,
+                zoom: 0.85
+            });
+        }
+    });
+    </script>
 </body>
 </html>
 

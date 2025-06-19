@@ -54,11 +54,106 @@
         .formspree-submission {
             border-left: 4px solid #17a2b8;
         }
+        @media (max-width: 767px) {
+            .hero-section {
+                padding: 30px 0 10px 0 !important;
+            }
+            .custom-form {
+                padding: 20px 10px !important;
+            }
+            .custom-form .form-control, .custom-form select, .custom-btn {
+                font-size: 1rem !important;
+                padding: 10px !important;
+            }
+            h1.text-white.text-center {
+                font-size: 2rem !important;
+            }
+            h6.text-center {
+                font-size: 1rem !important;
+            }
+        }
+        .custom-block, .card {
+            transition: transform 0.3s cubic-bezier(.25,.8,.25,1), box-shadow 0.3s;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 1.5px 6px rgba(0,0,0,0.08);
+        }
+        .custom-block:hover, .card:hover {
+            transform: translateY(-8px) scale(1.03) perspective(600px) rotateX(2deg) rotateY(-2deg);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.18), 0 3px 12px rgba(0,0,0,0.12);
+        }
+        .custom-btn, .btn {
+            transition: transform 0.2s cubic-bezier(.25,.8,.25,1), box-shadow 0.2s;
+        }
+        .custom-btn:hover, .btn:hover {
+            transform: scale(1.05) perspective(400px) rotateX(2deg);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+        }
+        .main-animate {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            animation: fadeInUp 0.8s cubic-bezier(.25,.8,.25,1) 0.2s forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+        #vanta-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 0;
+        }
+        main, .hero-section, .site-footer, .main-animate {
+            position: relative;
+            z-index: 1;
+        }
+        .hero-section button[type="button"] {
+            background-color: var(--primary-color);
+            border: 0;
+            border-radius: var(--border-radius-large) !important;
+            color: var(--white-color);
+            max-width: 150px;
+        }
+        .site-footer {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(45deg, #1abc9c, #3498db);
+            animation: gradientBG 15s ease infinite;
+            background-size: 400% 400%;
+        }
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            z-index: -1;
+        }
+        .site-footer .container {
+            position: relative;
+            z-index: 2;
+        }
     </style>
     <link href="../css/login-profile.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
 </head>
-<body>
-    <main>
+<body id="top">
+    <main class="main-animate">
         <header class="site-header d-flex flex-column justify-content-center align-items-center">
             <div class="container">
                 <div class="row align-items-center">
@@ -137,13 +232,41 @@
         </section>
     </main>
 
+    <footer class="site-footer section-padding" style="position:relative;overflow:hidden;">
+        <div id="vanta-footer" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;"></div>
+        <div class="container" style="position:relative;z-index:1; color: #111;">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p style="color:#111;">Admin Dashboard Footer</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/custom.js"></script>
     <script src="../js/admin-dashboard.js"></script>
-<script src="../js/login-debug.js"></script>
-<script src="../js/keyboard-shortcuts.js"></script>
-<script src="../js/login-profile.js"></script>
+    <script>
+    window.addEventListener('DOMContentLoaded', function() {
+        if (window.VANTA) {
+            VANTA.WAVES({
+                el: "#vanta-footer",
+                mouseControls: true,
+                touchControls: true,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.0,
+                scaleMobile: 1.0,
+                color: 0x1abc9c,
+                shininess: 50.0,
+                waveHeight: 20.0,
+                waveSpeed: 0.7,
+                zoom: 0.85
+            });
+        }
+    });
+    </script>
 </body>
 </html> 
 

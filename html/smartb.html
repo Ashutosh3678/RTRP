@@ -23,11 +23,70 @@
         <link href="../css/templatemo-topic-listing.css" rel="stylesheet">
 
         <link href="../css/login-profile.css" rel="stylesheet">
-</head>
+
+        <style>
+            @media (max-width: 767px) {
+                .hero-section {
+                    padding: 30px 0 10px 0 !important;
+                }
+                .custom-form {
+                    padding: 20px 10px !important;
+                }
+                .custom-form .form-control, .custom-form select, .custom-btn {
+                    font-size: 1rem !important;
+                    padding: 10px !important;
+                }
+                h1.text-white.text-center {
+                    font-size: 2rem !important;
+                }
+                h6.text-center {
+                    font-size: 1rem !important;
+                }
+            }
+            .custom-block, .card {
+                transition: transform 0.3s cubic-bezier(.25,.8,.25,1), box-shadow 0.3s;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 1.5px 6px rgba(0,0,0,0.08);
+            }
+            .custom-block:hover, .card:hover {
+                transform: translateY(-8px) scale(1.03) perspective(600px) rotateX(2deg) rotateY(-2deg);
+                box-shadow: 0 16px 40px rgba(0,0,0,0.18), 0 3px 12px rgba(0,0,0,0.12);
+            }
+            .custom-btn, .btn {
+                transition: transform 0.2s cubic-bezier(.25,.8,.25,1), box-shadow 0.2s;
+            }
+            .custom-btn:hover, .btn:hover {
+                transform: scale(1.05) perspective(400px) rotateX(2deg);
+                box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+            }
+            .main-animate {
+                opacity: 0;
+                transform: translateY(40px) scale(0.98);
+                animation: fadeInUp 0.8s cubic-bezier(.25,.8,.25,1) 0.2s forwards;
+            }
+            @keyframes fadeInUp {
+                to {
+                    opacity: 1;
+                    transform: none;
+                }
+            }
+            #vanta-bg {
+                position: fixed;
+                top: 0; left: 0; width: 100vw; height: 100vh;
+                z-index: 0;
+            }
+            main, .hero-section, .site-footer, .main-animate {
+                position: relative;
+                z-index: 1;
+            }
+        </style>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    </head>
     
     <body id="top">
-
-        <main>
+        <div id="vanta-bg"></div>
+        <main class="main-animate">
 
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
@@ -209,6 +268,26 @@
     <script src="../js/login-debug.js"></script>
 <script src="../js/keyboard-shortcuts.js"></script>
 <script src="../js/login-profile.js"></script>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  if (window.VANTA) {
+    VANTA.WAVES({
+      el: "#vanta-bg",
+      mouseControls: true,
+      touchControls: true,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.0,
+      scaleMobile: 1.0,
+      color: 0x1abc9c,
+      shininess: 50.0,
+      waveHeight: 20.0,
+      waveSpeed: 0.7,
+      zoom: 0.85
+    });
+  }
+});
+</script>
 </body>
 </html>
 
